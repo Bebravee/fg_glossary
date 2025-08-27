@@ -1,5 +1,10 @@
+import Header from "./components/header/header";
 import "./main.scss";
 
 export default function Home() {
-  return <div>123</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
