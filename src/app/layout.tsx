@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
+
+import Header from "./components/header/header";
+
 import "./main.scss";
 
 const exo_2 = Exo_2({
@@ -19,7 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={exo_2.variable}>
-      <body>{children}</body>
+      <body>
+        <div>
+          <Header />
+          <main>{children}</main>
+        </div>
+      </body>
     </html>
   );
 }

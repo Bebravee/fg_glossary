@@ -1,0 +1,29 @@
+@use "../../main.scss" as *;
+
+.Header {
+  padding: 25px 0;
+
+  background-color: #111111;
+
+  .Header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 25px;
+  }
+
+  .Header-content-links {
+    display: flex;
+    gap: 20px;
+
+    .non-active {
+      color: $font-color-alt;
+    }
+
+    .active {
+      text-decoration: underline;
+      color: $font-color;
+    }
+  }
+}
