@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import { Exo_2 } from "next/font/google";
+import "./main.scss";
+
+const exo_2 = Exo_2({
+  subsets: ["latin"],
+  variable: "--font-exo-2",
+});
 
 export const metadata: Metadata = {
   title: "fg_glossary",
@@ -11,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={exo_2.variable}>
       <body>{children}</body>
     </html>
   );
