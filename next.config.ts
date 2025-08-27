@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    turbo: {
+      rules: {
+        // говорим Turbopack: svg можно обрабатывать svgr
+        "*.svg": {
+          loaders: ["@svgr/webpack"],
+          as: "*.js", // svg становится js-компонентом
+        },
+      },
+    },
+  },
 };
 
 export default nextConfig;
