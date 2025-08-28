@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import NavMenuIcon from "@/assets/icons/nav_menu_icon.svg";
 
@@ -11,8 +11,9 @@ import "./header.scss";
 
 const Header = () => {
   const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const width = useWindowWidth();
 
@@ -22,6 +23,23 @@ const Header = () => {
       setTimeout(() => setIsMenuVisible(false), 150);
     }
   }, [width, isMenuVisible]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+        setTimeout(() => setIsMenuVisible(false), 150);
+      }
+    };
+
+    if (isMenuVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuVisible]);
 
   const links = [
     { href: "/", label: "Home" },
@@ -68,6 +86,7 @@ const Header = () => {
 
       {isMenuVisible && (
         <div
+          ref={menuRef}
           className={`Header-content-menu-mobile ${
             isMenuOpen ? "open" : "close"
           }`}
