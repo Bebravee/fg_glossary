@@ -28,6 +28,10 @@ body {
   @media (max-width: 850px) {
     padding: 0 50px;
   }
+
+  @media (max-width: 450px) {
+    padding: 0 25px;
+  }
 }
 
 .layout {
@@ -38,5 +42,9 @@ body {
 
   @media (max-width: 850px) {
     gap: 25px;
+  }
+
+  @media (max-width: 450px) {
+    gap: 10px;
   }
 }
