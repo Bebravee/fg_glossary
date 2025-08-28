@@ -2,7 +2,7 @@
 
 .Header {
   padding: 25px 0;
-  background-color: #1a1a1a;
+  background-color: $bg-alt-color;
 
   // ===== Header-content =====
   .Header-content {
@@ -97,7 +97,7 @@
 
   * {
     padding: 15px 0 15px 15px;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid $font-color;
   }
 
   .menu-mobile-active {

@@ -1,7 +1,19 @@
-import Header from "./components/header/header";
+"use client";
+
+import { useState } from "react";
+import "./homePage.scss";
+
+import Search from "./components/search/search";
 
 const HomePage = () => {
-  return <div></div>;
+  const [searchInput, setSearchInput] = useState<string>("");
+
+  return (
+    <div className="HomePage">
+      <Search value={searchInput} onChange={setSearchInput} />
+      {searchInput}
+    </div>
+  );
 };
 
 export default HomePage;

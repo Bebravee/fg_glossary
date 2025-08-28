@@ -1,9 +1,12 @@
 $font-color: #fff;
 $font-color-alt: #b4b4b4;
+$bg-main-color: #2e2e2e;
+$bg-alt-color: #1a1a1a;
 
 body {
   padding: 0;
   margin: 0;
+  background-color: $bg-main-color;
 
   * {
     font-family: var(--font-exo-2), sans-serif;
@@ -21,4 +24,19 @@ body {
 
 .container {
   padding: 0 100px;
+
+  @media (max-width: 850px) {
+    padding: 0 50px;
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+
+  gap: 50px;
+
+  @media (max-width: 850px) {
+    gap: 25px;
+  }
 }

@@ -23,9 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={exo_2.variable}>
       <body>
-        <div>
+        <div className="layout">
           <Header />
-          <main>{children}</main>
+          <main className="container">{children}</main>
         </div>
       </body>
     </html>
