@@ -82,3 +82,54 @@
     }
   }
 }
+
+.Header-content-menu-mobile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #2c2c2c;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 100%;
+  font-size: 25px;
+
+  * {
+    padding: 15px 0 15px 15px;
+    border-bottom: 1px solid #fff;
+  }
+
+  .menu-mobile-active {
+    color: $font-color;
+  }
+
+  .menu-mobile-non-active {
+    color: $font-color-alt;
+  }
+
+  &.open {
+    animation: isMenuOpen 0.15s ease forwards;
+  }
+
+  &.close {
+    animation: isMenuClose 0.15s ease forwards;
+  }
+}
+
+@keyframes isMenuOpen {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes isMenuClose {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
