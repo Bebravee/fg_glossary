@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./homePage.scss";
 
 import Search from "./components/search/search";
+import Terms from "./components/terms/terms";
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState<string>("");
@@ -11,7 +12,7 @@ const HomePage = () => {
   return (
     <div className="HomePage">
       <Search value={searchInput} onChange={setSearchInput} />
-      {searchInput}
+      <Terms searchInput={searchInput} />
     </div>
   );
 };

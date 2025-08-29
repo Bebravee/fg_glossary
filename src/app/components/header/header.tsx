@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import NavMenuIcon from "@/assets/icons/nav_menu_icon.svg";
+import rukia from "../../../../public/rukia.png";
 
 import "./header.scss";
 
@@ -64,6 +65,13 @@ const Header = () => {
         <div className="Header-content container">
           <Link href="/" className="Header-logo">
             FG Glossary RU
+            <Image
+              className="Header-content-rukia"
+              src={rukia}
+              alt="rukia"
+              width={50}
+              height={50}
+            />
           </Link>
 
           <div className="Header-content-links">
