@@ -1,5 +1,26 @@
+@use "../../main.scss" as *;
 .Terms {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 25px;
+
+  .Terms-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nested {
+    margin-left: 45px;
+  }
+
+  &-nested-word {
+    text-decoration: underline;
+  }
+}
+
+.Terms-closed-nested {
+  background-color: $bg-alt-color;
+  border: none;
+  width: 150px;
 }
