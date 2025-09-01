@@ -1,26 +1,39 @@
 @use "../../main.scss" as *;
+
 .Terms {
   display: flex;
   flex-direction: column;
-  gap: 25px;
 
-  .Terms-content {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .nested {
-    margin-left: 45px;
-  }
-
-  &-nested-word {
-    text-decoration: underline;
-  }
+  gap: 50px;
 }
 
-.Terms-closed-nested {
-  background-color: $bg-alt-color;
-  border: none;
+.Terms-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 25px;
+}
+
+.Terms-content-video {
+  width: 500px;
+  height: 280px;
+}
+
+.Terms-content-video-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 15px;
   width: 150px;
+  height: 50px;
+  background-color: $bg-alt-color2;
+  border: none;
+
+  transition: all 0.15s ease;
+  font-size: 15px;
+
+  &:hover {
+    background-color: $bg-alt-color;
+  }
 }

@@ -1,6 +1,7 @@
 @use "../../main.scss" as *;
 
 .Header {
+  position: sticky;
   padding: 25px 0;
   background-color: $bg-alt-color;
 
@@ -12,7 +13,6 @@
     padding: 8px 0;
   }
 
-  // ===== Header-content =====
   .Header-content {
     display: flex;
     justify-content: space-between;
@@ -25,7 +25,6 @@
     }
   }
 
-  // ===== Header-logo =====
   .Header-logo {
     @media (max-width: 850px) {
       text-align: center;

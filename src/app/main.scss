@@ -3,6 +3,7 @@ $font-color-alt: #b4b4b4;
 $bg-main-color: #2f2933;
 $bg-alt-color: #1d1c20;
 $bg-alt-color2: #211f25;
+$bg-alt-color3: #2e2b33;
 
 body {
   padding: 0;
@@ -35,17 +36,41 @@ body {
   }
 }
 
+main.container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 100px;
+
+  @media (max-width: 850px) {
+    padding: 0 50px;
+  }
+
+  @media (max-width: 450px) {
+    padding: 0 25px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 12px; /* ширина скроллбара */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $bg-alt-color2; /* цвет заднего фона скроллбара */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $bg-alt-color3; /* цвет "ползунка" */
+    border-radius: 6px; /* скругление ползунка */
+    border: 3px solid $bg-alt-color2; /* отступ вокруг ползунка */
+  }
+
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: $bg-alt-color3 $bg-alt-color2; /* thumb track */
+}
+
 .layout {
   display: flex;
   flex-direction: column;
 
-  gap: 50px;
-
-  @media (max-width: 850px) {
-    gap: 25px;
-  }
-
-  @media (max-width: 450px) {
-    gap: 10px;
-  }
+  height: 100vh;
 }
