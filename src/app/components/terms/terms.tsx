@@ -1,10 +1,17 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import terms from "./terms.json";
 import "./terms.scss";
 
 interface TermsProps {
   searchInput: string;
+}
+
+interface NestedTerm {
+  id: number;
+  original: string;
+  russian: string;
+  description: string;
 }
 
 interface Term {
@@ -13,7 +20,7 @@ interface Term {
   russian: string;
   description: string;
   aliases: string[];
-  nestedTerms: any[];
+  nestedTerms: NestedTerm[];
   video?: string;
 }
 
@@ -42,13 +49,11 @@ const Terms = ({ searchInput }: TermsProps) => {
 
   const filteredTerms = filterTerms(terms, searchInput);
 
-  const termFunction = () => {};
-
   return (
     <div className="Terms">
       {filteredTerms.length === 0 ? (
         <div className="Terms-no-results">
-          Ничего не найдено по запросу: "{searchInput}"
+          Ничего не найдено по запросу: &quot;{searchInput}&quot;
         </div>
       ) : (
         filteredTerms.map((term) => {
