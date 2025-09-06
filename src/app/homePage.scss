@@ -1,12 +1,12 @@
+@use "./main.scss" as *;
+
 .HomePage {
   display: flex;
   flex-direction: column;
-
   margin-top: 50px;
-
   gap: 50px;
 
-  @media (max-width: 850px) {
+  @media (max-width: $medium-screen) {
     gap: 25px;
   }
 }

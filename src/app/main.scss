@@ -5,6 +5,9 @@ $bg-alt-color: #1d1c20;
 $bg-alt-color2: #211f25;
 $bg-alt-color3: #2e2b33;
 
+$medium-screen: 850px;
+$small-screen: 350px;
+
 body {
   padding: 0;
   margin: 0;
@@ -27,7 +30,7 @@ body {
 .container {
   padding: 0 100px;
 
-  @media (max-width: 850px) {
+  @media (max-width: $medium-screen) {
     padding: 0 50px;
   }
 
@@ -41,7 +44,7 @@ main.container {
   overflow-y: auto;
   padding: 0 100px;
 
-  @media (max-width: 850px) {
+  @media (max-width: $medium-screen) {
     padding: 0 50px;
   }
 
@@ -50,22 +53,22 @@ main.container {
   }
 
   &::-webkit-scrollbar {
-    width: 12px; /* ширина скроллбара */
+    width: 12px;
   }
 
   &::-webkit-scrollbar-track {
-    background: $bg-alt-color2; /* цвет заднего фона скроллбара */
+    background: $bg-alt-color2;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $bg-alt-color3; /* цвет "ползунка" */
-    border-radius: 6px; /* скругление ползунка */
-    border: 3px solid $bg-alt-color2; /* отступ вокруг ползунка */
+    background-color: $bg-alt-color3;
+    border-radius: 6px;
+    border: 3px solid $bg-alt-color2;
   }
 
   /* Firefox */
   scrollbar-width: thin;
-  scrollbar-color: $bg-alt-color3 $bg-alt-color2; /* thumb track */
+  scrollbar-color: $bg-alt-color3 $bg-alt-color2;
 }
 
 .layout {

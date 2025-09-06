@@ -3,37 +3,49 @@
 .Terms {
   display: flex;
   flex-direction: column;
-
   gap: 50px;
+}
+
+.Terms-no-results {
 }
 
 .Terms-content {
   display: flex;
   flex-direction: column;
-
   gap: 25px;
 }
 
-.Terms-content-video {
-  width: 500px;
-  height: 280px;
+.Terms-content-description {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.Terms-content-description-span {
+  display: inline;
 }
 
 .Terms-content-video-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-radius: 15px;
-  width: 150px;
+  max-width: 150px;
   height: 50px;
   background-color: $bg-alt-color2;
   border: none;
-
   transition: all 0.15s ease;
   font-size: 15px;
 
   &:hover {
     background-color: $bg-alt-color;
   }
+}
+
+.Terms-content-video-container {
+}
+
+.Terms-content-video {
+  width: 500px;
+  height: 280px;
 }

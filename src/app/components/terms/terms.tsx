@@ -42,6 +42,8 @@ const Terms = ({ searchInput }: TermsProps) => {
 
   const filteredTerms = filterTerms(terms, searchInput);
 
+  const termFunction = () => {};
+
   return (
     <div className="Terms">
       {filteredTerms.length === 0 ? (
@@ -57,7 +59,13 @@ const Terms = ({ searchInput }: TermsProps) => {
               <h1>
                 {term.original} ({term.russian})
               </h1>
-              <p>{term.description}</p>
+              <p className="Terms-content-description">
+                {term.description.split(" ").map((word, index) => (
+                  <span className="Terms-content-description-span" key={index}>
+                    {word}{" "}
+                  </span>
+                ))}
+              </p>
 
               {term.video && (
                 <button

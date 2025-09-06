@@ -5,93 +5,107 @@
   padding: 25px 0;
   background-color: $bg-alt-color;
 
-  @media (max-width: 850px) {
+  @media (max-width: $medium-screen) {
     padding: 15px 0;
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: $small-screen) {
     padding: 8px 0;
   }
+}
 
-  .Header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 25px;
+.Header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
 
-    @media (max-width: 850px) {
-      justify-content: center;
-      position: relative;
-    }
-  }
-
-  .Header-logo {
-    @media (max-width: 850px) {
-      text-align: center;
-      width: 100%;
-      font-size: 20px;
-    }
-
-    @media (max-width: 600px) {
-      font-size: 18px;
-    }
-
-    @media (max-width: 350px) {
-      font-size: 12px;
-    }
-  }
-
-  // ===== Header-content-links =====
-  .Header-content-links {
-    display: flex;
-    gap: 20px;
-
-    .non-active {
-      color: $font-color-alt;
-
-      transition: color 0.2s ease;
-      &:hover {
-        color: $font-color;
-      }
-    }
-
-    .active {
-      text-decoration: underline;
-      color: $font-color;
-    }
-
-    @media (max-width: 850px) {
-      display: none;
-    }
-  }
-
-  // ===== Header-content-menu-btn =====
-  .Header-content-menu-btn {
-    display: none;
-    background: transparent;
-    border: none;
-    padding: 0;
-    align-items: center;
+  @media (max-width: $medium-screen) {
     justify-content: center;
+    position: relative;
+  }
+}
 
-    @media (max-width: 850px) {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-    }
+.Header-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
-    // ===== Icon inside button =====
-    .Header-content-menu-btn-icon {
-      width: 35px;
-      height: 35px;
+  @media (max-width: $medium-screen) {
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+  }
 
-      @media (max-width: 350px) {
-        width: 20px;
-        height: 20px;
-      }
-    }
+  @media (max-width: 600px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: $small-screen) {
+    font-size: 12px;
+  }
+}
+
+.Header-content-rukia {
+  @media (max-width: $medium-screen) {
+    width: 40px;
+    height: 40px;
+  }
+
+  @media (max-width: $small-screen) {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+.Header-content-links {
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: $medium-screen) {
+    display: none;
+  }
+}
+
+.non-active {
+  color: $font-color-alt;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $font-color;
+  }
+}
+
+.active {
+  text-decoration: underline;
+  color: $font-color;
+}
+
+.Header-content-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $medium-screen) {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+  }
+}
+
+.Header-content-menu-btn-icon {
+  width: 35px;
+  height: 35px;
+
+  @media (max-width: $small-screen) {
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -111,22 +125,22 @@
     padding: 15px 0 15px 15px;
     border-bottom: 1px solid $font-color;
   }
+}
 
-  .menu-mobile-active {
-    color: $font-color;
-  }
+.menu-mobile-active {
+  color: $font-color;
+}
 
-  .menu-mobile-non-active {
-    color: $font-color-alt;
-  }
+.menu-mobile-non-active {
+  color: $font-color-alt;
+}
 
-  &.open {
-    animation: isMenuOpen 0.15s ease forwards;
-  }
+.open {
+  animation: isMenuOpen 0.15s ease forwards;
+}
 
-  &.close {
-    animation: isMenuClose 0.15s ease forwards;
-  }
+.close {
+  animation: isMenuClose 0.15s ease forwards;
 }
 
 @keyframes isMenuOpen {
@@ -144,24 +158,5 @@
   }
   to {
     transform: translateX(100%);
-  }
-}
-
-.Header-logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.Header-content-rukia {
-  @media (max-width: 850px) {
-    width: 40px;
-    height: 40px;
-  }
-
-  @media (max-width: 350px) {
-    width: 25px;
-    height: 25px;
   }
 }
