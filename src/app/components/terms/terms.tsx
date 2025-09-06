@@ -56,7 +56,7 @@ const Terms = ({ searchInput }: TermsProps) => {
 
           return (
             <div className="Terms-content" key={term.id}>
-              <h1>
+              <h1 className="Terms-content-name">
                 {term.original} ({term.russian})
               </h1>
               <p className="Terms-content-description">
@@ -66,7 +66,6 @@ const Terms = ({ searchInput }: TermsProps) => {
                   </span>
                 ))}
               </p>
-
               {term.video && (
                 <button
                   className="Terms-content-video-btn"

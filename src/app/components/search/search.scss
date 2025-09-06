@@ -10,5 +10,9 @@
     background-color: $bg-alt-color;
     outline: none;
     font-size: 24px;
+
+    @media (max-width: $medium-screen) {
+      font-size: 16px;
+    }
   }
 }
