@@ -64,34 +64,39 @@ const Terms = ({ searchInput }: TermsProps) => {
               <h1 className="Terms-content-name">
                 {term.original} ({term.russian})
               </h1>
-              <p className="Terms-content-description">
-                {term.description.split(" ").map((word, index) => (
-                  <span className="Terms-content-description-span" key={index}>
-                    {word}{" "}
-                  </span>
-                ))}
-              </p>
-              {term.video && (
-                <button
-                  className="Terms-content-video-btn"
-                  onClick={() => toggleVideo(term.id)}
-                >
-                  {isVideoOpen ? "Скрыть видео" : "Показать видео"}
-                </button>
-              )}
+              <div className="Terms-content-container">
+                <p className="Terms-content-description">
+                  {term.description.split(" ").map((word, index) => (
+                    <span
+                      className="Terms-content-description-span"
+                      key={index}
+                    >
+                      {word}{" "}
+                    </span>
+                  ))}
+                </p>
+                {term.video && (
+                  <button
+                    className="Terms-content-video-btn"
+                    onClick={() => toggleVideo(term.id)}
+                  >
+                    {isVideoOpen ? "Скрыть видео" : "Показать видео"}
+                  </button>
+                )}
 
-              {isVideoOpen && term.video && (
-                <div className="Terms-content-video-container">
-                  <iframe
-                    className="Terms-content-video"
-                    src={term.video}
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              )}
+                {isVideoOpen && term.video && (
+                  <div className="Terms-content-video-container">
+                    <iframe
+                      className="Terms-content-video"
+                      src={term.video}
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           );
         })
