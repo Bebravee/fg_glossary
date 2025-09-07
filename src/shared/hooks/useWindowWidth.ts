@@ -5,7 +5,7 @@ const useWindowWidth = () => {
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
-    handleResize(); // сразу при монтировании
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);

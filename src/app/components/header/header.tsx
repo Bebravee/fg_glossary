@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import useWindowWidth from "@/hooks/useWindowWidth";
+import useWindowWidth from "@/shared/hooks/useWindowWidth";
 import NavMenuIcon from "@/assets/icons/nav_menu_icon.svg";
 import rukia from "../../../../public/rukia.png";
 
