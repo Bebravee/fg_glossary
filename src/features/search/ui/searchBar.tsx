@@ -1,11 +1,11 @@
-import "./search.scss";
+import "./searchBar.scss";
 
 interface SearchProps {
   value: string;
   onChange: (value: string) => void;
 }
 
-const Search = ({ value, onChange }: SearchProps) => {
+const SearchBar = ({ value, onChange }: SearchProps) => {
   return (
     <div className="Search">
       <input
@@ -18,4 +18,4 @@ const Search = ({ value, onChange }: SearchProps) => {
   );
 };
 
-export default Search;
+export default SearchBar;

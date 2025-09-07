@@ -3,26 +3,11 @@ import { useState } from "react";
 import terms from "./terms.json";
 import "./terms.scss";
 import TermInDescription from "../termInDescription/termInDescription";
+import Term from "../../../entities/term/model/types";
+import useSearch from "@/features/search/modal/useSearch";
 
 interface TermsProps {
   searchInput: string;
-}
-
-interface NestedTerm {
-  id: number;
-  original: string;
-  russian: string;
-  description: string;
-}
-
-interface Term {
-  id: number;
-  original: string;
-  russian: string;
-  description: string;
-  aliases: string[];
-  nestedTerms: NestedTerm[];
-  video?: string;
 }
 
 const Terms = ({ searchInput }: TermsProps) => {
@@ -32,23 +17,7 @@ const Terms = ({ searchInput }: TermsProps) => {
     setOpenVideoId(openVideoId === termId ? null : termId);
   };
 
-  const filterTerms = (terms: Term[], searchText: string): Term[] => {
-    if (!searchText.trim()) return terms;
-
-    const searchLower = searchText.toLowerCase();
-
-    return terms.filter((term) => {
-      const matchesOriginal = term.original.toLowerCase().includes(searchLower);
-      const matchesRussian = term.russian.toLowerCase().includes(searchLower);
-      const matchesAliases = term.aliases.some((alias) =>
-        alias.toLowerCase().includes(searchLower)
-      );
-
-      return matchesOriginal || matchesRussian || matchesAliases;
-    });
-  };
-
-  const filteredTerms = filterTerms(terms, searchInput);
+  const filteredTerms = useSearch(terms, searchInput);
 
   return (
     <div className="Terms">
@@ -66,14 +35,14 @@ const Terms = ({ searchInput }: TermsProps) => {
                 {term.original} ({term.russian})
               </h1>
               <div className="Terms-content-container">
-                <p className="Terms-content-description">
+                <div className="Terms-content-description">
                   <TermInDescription
                     description={term.description}
                     original={term.original}
                     russian={term.russian}
                     aliases={term.aliases}
                   />
-                </p>
+                </div>
                 {term.video && (
                   <button
                     className="Terms-content-video-btn"

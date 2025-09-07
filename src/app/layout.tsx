@@ -3,7 +3,7 @@ import { Exo_2 } from "next/font/google";
 
 import Header from "./components/header/header";
 
-import "./main.scss";
+import "../shared/styles/global.scss";
 
 const exo_2 = Exo_2({
   subsets: ["latin"],

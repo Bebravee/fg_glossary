@@ -3,7 +3,7 @@
 import { useState } from "react";
 import "./homePage.scss";
 
-import Search from "./components/search/search";
+import Search from "../features/search/ui/searchBar";
 import Terms from "./components/terms/terms";
 
 const HomePage = () => {
