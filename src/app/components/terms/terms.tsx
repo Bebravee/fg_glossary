@@ -2,6 +2,7 @@
 import { useState } from "react";
 import terms from "./terms.json";
 import "./terms.scss";
+import TermInDescription from "../termInDescription/termInDescription";
 
 interface TermsProps {
   searchInput: string;
@@ -66,14 +67,12 @@ const Terms = ({ searchInput }: TermsProps) => {
               </h1>
               <div className="Terms-content-container">
                 <p className="Terms-content-description">
-                  {term.description.split(" ").map((word, index) => (
-                    <span
-                      className="Terms-content-description-span"
-                      key={index}
-                    >
-                      {word}{" "}
-                    </span>
-                  ))}
+                  <TermInDescription
+                    description={term.description}
+                    original={term.original}
+                    russian={term.russian}
+                    aliases={term.aliases}
+                  />
                 </p>
                 {term.video && (
                   <button
