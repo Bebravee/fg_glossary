@@ -3,8 +3,8 @@
 import { useState } from "react";
 import "./homePage.scss";
 
-import Search from "../features/search/ui/searchBar";
-import Terms from "./components/terms/terms";
+import Search from "@/features/search/ui/searchBar";
+import Terms from "@/features/terms/ui/terms";
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState<string>("");

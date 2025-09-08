@@ -1,10 +1,8 @@
 "use client";
 import { useState } from "react";
-import terms from "./terms.json";
+import terms from "@/shared/date/terms.json";
 import "./terms.scss";
-import TermInDescription from "../termInDescription/termInDescription";
-import Term from "../../../entities/term/model/types";
-import useSearch from "@/features/search/modal/useSearch";
+import FilterSearch from "@/features/search/modal/FilterSearch";
 
 interface TermsProps {
   searchInput: string;
@@ -17,7 +15,7 @@ const Terms = ({ searchInput }: TermsProps) => {
     setOpenVideoId(openVideoId === termId ? null : termId);
   };
 
-  const filteredTerms = useSearch(terms, searchInput);
+  const filteredTerms = FilterSearch(terms, searchInput);
 
   return (
     <div className="Terms">
@@ -36,12 +34,11 @@ const Terms = ({ searchInput }: TermsProps) => {
               </h1>
               <div className="Terms-content-container">
                 <div className="Terms-content-description">
-                  <TermInDescription
-                    description={term.description}
-                    original={term.original}
-                    russian={term.russian}
-                    aliases={term.aliases}
-                  />
+                  {term.description.split(" ").map((word, index) => (
+                    <span className="TermInDescription-word" key={index}>
+                      {word}{" "}
+                    </span>
+                  ))}
                 </div>
                 {term.video && (
                   <button

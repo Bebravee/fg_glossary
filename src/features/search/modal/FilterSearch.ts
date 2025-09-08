@@ -1,6 +1,6 @@
 import type Term from "@/entities/term/model/types";
 
-const useSearch = (terms: Term[], searchText: string): Term[] => {
+const FilterSearch = (terms: Term[], searchText: string): Term[] => {
   if (!searchText.trim()) return terms;
 
   const searchLower = searchText.toLowerCase();
@@ -18,4 +18,4 @@ const useSearch = (terms: Term[], searchText: string): Term[] => {
   });
 };
 
-export default useSearch;
+export default FilterSearch;

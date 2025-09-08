@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
 
-import Header from "./components/header/header";
+import Header from "@/shared/ui/header/header";
 
-import "../shared/styles/global.scss";
+import "@/shared/styles/global.scss";
 
 const exo_2 = Exo_2({
   subsets: ["latin"],
