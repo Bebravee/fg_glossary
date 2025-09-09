@@ -4,7 +4,7 @@ import terms from "@/shared/date/terms.json";
 import "./terms.scss";
 import FilterSearch from "@/features/search/modal/FilterSearch";
 import CheckTermInDescription from "@/entities/term/ui/checkTermInDescription";
-import useNestedTerms from "@/shared/hooks/useNestedTerms";
+import { Term } from "@/entities/term/model/types";
 
 interface TermsProps {
   searchInput: string;
@@ -12,11 +12,36 @@ interface TermsProps {
 
 const Terms = ({ searchInput }: TermsProps) => {
   const [openVideoId, setOpenVideoId] = useState<number | null>(null);
-  const { addNestedTerm, removeNestedTerm, getNestedTerms, clearNestedTerms } =
-    useNestedTerms();
+  const [nestedTerms, setNestedTerms] = useState<Record<number, Term[]>>({});
 
   const toggleVideo = (termId: number) => {
     setOpenVideoId(openVideoId === termId ? null : termId);
+  };
+
+  const addNestedTerm = (parentTermId: number, termToAdd: Term) => {
+    if (parentTermId === termToAdd.id) return;
+
+    setNestedTerms((prev) => {
+      const currentNestedTerms = prev[parentTermId] || [];
+
+      if (currentNestedTerms.some((term) => term.id === termToAdd.id)) {
+        return prev;
+      }
+
+      return {
+        ...prev,
+        [parentTermId]: [...currentNestedTerms, termToAdd],
+      };
+    });
+  };
+
+  const removeNestedTerm = (parentTermId: number, termIdToRemove: number) => {
+    setNestedTerms((prev) => ({
+      ...prev,
+      [parentTermId]: (prev[parentTermId] || []).filter(
+        (term) => term.id !== termIdToRemove
+      ),
+    }));
   };
 
   const filteredTerms = FilterSearch(terms, searchInput);
@@ -34,6 +59,7 @@ const Terms = ({ searchInput }: TermsProps) => {
       ) : (
         filteredTerms.map((term) => {
           const isVideoOpen = openVideoId === term.id;
+          const currentNestedTerms = nestedTerms[term.id] || [];
 
           return (
             <div className="Terms-content" key={term.id}>
@@ -50,6 +76,9 @@ const Terms = ({ searchInput }: TermsProps) => {
                         key={index}
                         word={part}
                         terms={terms}
+                        onTermClick={(clickedTerm) =>
+                          addNestedTerm(term.id, clickedTerm)
+                        }
                       />
                     ) : (
                       <span key={index}>{part}</span>
@@ -75,6 +104,60 @@ const Terms = ({ searchInput }: TermsProps) => {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />
+                  </div>
+                )}
+
+                {currentNestedTerms.length > 0 && (
+                  <div className="Terms-nested-container">
+                    {currentNestedTerms.map((nestedTerm) => (
+                      <div key={nestedTerm.id} className="Terms-nested-item">
+                        <div className="Terms-nested-header">
+                          <h4 className="Terms-content-name">
+                            {nestedTerm.original} ({nestedTerm.russian})
+                          </h4>
+                          <button
+                            className="Terms-nested-close"
+                            onClick={() =>
+                              removeNestedTerm(term.id, nestedTerm.id)
+                            }
+                          >
+                            ×
+                          </button>
+                        </div>
+                        <div className="Terms-content-description">
+                          {tokenize(nestedTerm.description).map(
+                            (part, index) => {
+                              const isWord = /[a-zа-яё0-9]/i.test(part);
+
+                              return isWord ? (
+                                <CheckTermInDescription
+                                  key={index}
+                                  word={part}
+                                  terms={terms}
+                                  onTermClick={(clickedTerm) =>
+                                    addNestedTerm(term.id, clickedTerm)
+                                  }
+                                />
+                              ) : (
+                                <span key={index}>{part}</span>
+                              );
+                            }
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                    {isVideoOpen && term.video && (
+                      <div className="Terms-content-video-container">
+                        <iframe
+                          className="Terms-content-video"
+                          src={term.video}
+                          loading="lazy"
+                          referrerPolicy="no-referrer"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

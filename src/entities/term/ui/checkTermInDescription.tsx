@@ -4,11 +4,13 @@ import "./checkTermInDescription.scss";
 interface CheckTermInDescriptionProps {
   word: string;
   terms: Term[];
+  onTermClick?: (term: Term) => void;
 }
 
 const CheckTermInDescription = ({
   word,
   terms,
+  onTermClick,
 }: CheckTermInDescriptionProps) => {
   const normalize = (str: string) =>
     str
@@ -26,8 +28,10 @@ const CheckTermInDescription = ({
     return false;
   });
 
-  const handleTermClick = (foundTerm: Term) => {
-    console.log(foundTerm);
+  const handleTermClick = () => {
+    if (foundTerm && onTermClick) {
+      onTermClick(foundTerm);
+    }
   };
 
   return (
@@ -35,7 +39,7 @@ const CheckTermInDescription = ({
       className={`Terms-content-description-word ${
         foundTerm ? "highlight" : ""
       }`}
-      onClick={foundTerm ? () => handleTermClick(foundTerm) : undefined}
+      onClick={foundTerm ? handleTermClick : undefined}
     >
       {word}
     </span>

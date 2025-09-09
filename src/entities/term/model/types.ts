@@ -6,8 +6,3 @@ export type Term = {
   aliases: string[];
   video?: string;
 };
-
-export type NestedTerms = {
-  id: number;
-  terms: Term[];
-};
