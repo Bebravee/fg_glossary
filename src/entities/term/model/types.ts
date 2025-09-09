@@ -1,4 +1,4 @@
-type Term = {
+export type Term = {
   id: number;
   original: string;
   russian: string;
@@ -7,4 +7,7 @@ type Term = {
   video?: string;
 };
 
-export default Term;
+export type NestedTerms = {
+  id: number;
+  terms: Term[];
+};

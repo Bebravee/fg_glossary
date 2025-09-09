@@ -3,6 +3,8 @@ import { useState } from "react";
 import terms from "@/shared/date/terms.json";
 import "./terms.scss";
 import FilterSearch from "@/features/search/modal/FilterSearch";
+import CheckTermInDescription from "@/entities/term/ui/checkTermInDescription";
+import useNestedTerms from "@/shared/hooks/useNestedTerms";
 
 interface TermsProps {
   searchInput: string;
@@ -10,12 +12,18 @@ interface TermsProps {
 
 const Terms = ({ searchInput }: TermsProps) => {
   const [openVideoId, setOpenVideoId] = useState<number | null>(null);
+  const { addNestedTerm, removeNestedTerm, getNestedTerms, clearNestedTerms } =
+    useNestedTerms();
 
   const toggleVideo = (termId: number) => {
     setOpenVideoId(openVideoId === termId ? null : termId);
   };
 
   const filteredTerms = FilterSearch(terms, searchInput);
+
+  const tokenize = (text: string) => {
+    return text.split(/(\s+|[.,!?;:()«»"'])/).filter(Boolean);
+  };
 
   return (
     <div className="Terms">
@@ -34,11 +42,19 @@ const Terms = ({ searchInput }: TermsProps) => {
               </h1>
               <div className="Terms-content-container">
                 <div className="Terms-content-description">
-                  {term.description.split(" ").map((word, index) => (
-                    <span className="TermInDescription-word" key={index}>
-                      {word}{" "}
-                    </span>
-                  ))}
+                  {tokenize(term.description).map((part, index) => {
+                    const isWord = /[a-zа-яё0-9]/i.test(part);
+
+                    return isWord ? (
+                      <CheckTermInDescription
+                        key={index}
+                        word={part}
+                        terms={terms}
+                      />
+                    ) : (
+                      <span key={index}>{part}</span>
+                    );
+                  })}
                 </div>
                 {term.video && (
                   <button
