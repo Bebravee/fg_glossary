@@ -70,7 +70,7 @@ const NestedTerms = ({
                   }
                 >
                   {openNestedVideoId === nestedTerm.id ? (
-                    "Скрыть видео"
+                    <ShowVideoIcon />
                   ) : (
                     <ShowVideoIcon />
                   )}
