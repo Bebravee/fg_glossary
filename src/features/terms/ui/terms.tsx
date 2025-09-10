@@ -12,6 +12,9 @@ interface TermsProps {
 
 const Terms = ({ searchInput }: TermsProps) => {
   const [openVideoId, setOpenVideoId] = useState<number | null>(null);
+  const [openNestedVideoId, setOpenNestedVideoId] = useState<number | null>(
+    null
+  );
   const [nestedTerms, setNestedTerms] = useState<Record<number, Term[]>>({});
 
   const toggleVideo = (termId: number) => {
@@ -144,20 +147,38 @@ const Terms = ({ searchInput }: TermsProps) => {
                             }
                           )}
                         </div>
+                        {nestedTerm.video && (
+                          <button
+                            className="Terms-content-video-btn"
+                            onClick={() =>
+                              setOpenNestedVideoId(
+                                openNestedVideoId === nestedTerm.id
+                                  ? null
+                                  : nestedTerm.id
+                              )
+                            }
+                          >
+                            {openNestedVideoId === nestedTerm.id
+                              ? "Скрыть видео"
+                              : "Показать видео"}
+                          </button>
+                        )}
+
+                        {openNestedVideoId === nestedTerm.id &&
+                          nestedTerm.video && (
+                            <div className="Terms-content-video-container">
+                              <iframe
+                                className="Terms-content-video"
+                                src={nestedTerm.video}
+                                loading="lazy"
+                                referrerPolicy="no-referrer"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              />
+                            </div>
+                          )}
                       </div>
                     ))}
-                    {isVideoOpen && term.video && (
-                      <div className="Terms-content-video-container">
-                        <iframe
-                          className="Terms-content-video"
-                          src={term.video}
-                          loading="lazy"
-                          referrerPolicy="no-referrer"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      </div>
-                    )}
                   </div>
                 )}
               </div>
