@@ -1,0 +1,20 @@
+@use "@/shared/styles/global.scss" as *;
+
+.Terms-nested-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+}
+
+.Terms-nested-header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.Terms-nested-close {
+  background-color: $bg-main-color;
+  border: none;
+  font-size: 25px;
+}

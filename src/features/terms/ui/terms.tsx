@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import terms from "@/shared/date/terms.json";
 import "./terms.scss";
 import FilterSearch from "@/features/search/modal/FilterSearch";
-import CheckTermInDescription from "@/entities/term/ui/checkTermInDescription";
+import TermCard from "@/entities/term/ui/TermCard";
 import { Term } from "@/entities/term/model/types";
 
 interface TermsProps {
@@ -12,7 +12,16 @@ interface TermsProps {
 
 const Terms = ({ searchInput }: TermsProps) => {
   const [openVideoId, setOpenVideoId] = useState<number | null>(null);
+  const [openNestedVideoId, setOpenNestedVideoId] = useState<number | null>(
+    null
+  );
   const [nestedTerms, setNestedTerms] = useState<Record<number, Term[]>>({});
+
+  useEffect(() => {
+    setNestedTerms({});
+    setOpenVideoId(null);
+    setOpenNestedVideoId(null);
+  }, [searchInput]);
 
   const toggleVideo = (termId: number) => {
     setOpenVideoId(openVideoId === termId ? null : termId);
@@ -62,106 +71,19 @@ const Terms = ({ searchInput }: TermsProps) => {
           const currentNestedTerms = nestedTerms[term.id] || [];
 
           return (
-            <div className="Terms-content" key={term.id}>
-              <h1 className="Terms-content-name">
-                {term.original} ({term.russian})
-              </h1>
-              <div className="Terms-content-container">
-                <div className="Terms-content-description">
-                  {tokenize(term.description).map((part, index) => {
-                    const isWord = /[a-zа-яё0-9]/i.test(part);
-
-                    return isWord ? (
-                      <CheckTermInDescription
-                        key={index}
-                        word={part}
-                        terms={terms}
-                        onTermClick={(clickedTerm) =>
-                          addNestedTerm(term.id, clickedTerm)
-                        }
-                      />
-                    ) : (
-                      <span key={index}>{part}</span>
-                    );
-                  })}
-                </div>
-                {term.video && (
-                  <button
-                    className="Terms-content-video-btn"
-                    onClick={() => toggleVideo(term.id)}
-                  >
-                    {isVideoOpen ? "Скрыть видео" : "Показать видео"}
-                  </button>
-                )}
-
-                {isVideoOpen && term.video && (
-                  <div className="Terms-content-video-container">
-                    <iframe
-                      className="Terms-content-video"
-                      src={term.video}
-                      loading="lazy"
-                      referrerPolicy="no-referrer"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
-                )}
-
-                {currentNestedTerms.length > 0 && (
-                  <div className="Terms-nested-container">
-                    {currentNestedTerms.map((nestedTerm) => (
-                      <div key={nestedTerm.id} className="Terms-nested-item">
-                        <div className="Terms-nested-header">
-                          <h4 className="Terms-content-name">
-                            {nestedTerm.original} ({nestedTerm.russian})
-                          </h4>
-                          <button
-                            className="Terms-nested-close"
-                            onClick={() =>
-                              removeNestedTerm(term.id, nestedTerm.id)
-                            }
-                          >
-                            ×
-                          </button>
-                        </div>
-                        <div className="Terms-content-description">
-                          {tokenize(nestedTerm.description).map(
-                            (part, index) => {
-                              const isWord = /[a-zа-яё0-9]/i.test(part);
-
-                              return isWord ? (
-                                <CheckTermInDescription
-                                  key={index}
-                                  word={part}
-                                  terms={terms}
-                                  onTermClick={(clickedTerm) =>
-                                    addNestedTerm(term.id, clickedTerm)
-                                  }
-                                />
-                              ) : (
-                                <span key={index}>{part}</span>
-                              );
-                            }
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                    {isVideoOpen && term.video && (
-                      <div className="Terms-content-video-container">
-                        <iframe
-                          className="Terms-content-video"
-                          src={term.video}
-                          loading="lazy"
-                          referrerPolicy="no-referrer"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        />
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
+            <TermCard
+              key={term.id}
+              term={term}
+              terms={terms}
+              isVideoOpen={isVideoOpen}
+              toggleVideo={toggleVideo}
+              currentNestedTerms={currentNestedTerms}
+              addNestedTerm={addNestedTerm}
+              removeNestedTerm={removeNestedTerm}
+              openNestedVideoId={openNestedVideoId}
+              setOpenNestedVideoId={setOpenNestedVideoId}
+              tokenize={tokenize}
+            />
           );
         })
       )}
