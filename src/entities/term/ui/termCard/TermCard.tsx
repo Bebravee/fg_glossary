@@ -1,7 +1,9 @@
 "use client";
-import CheckTermInDescription from "@/entities/term/ui/checkTermInDescription";
-import NestedTerms from "@/entities/term/ui/NestedTerms";
+import CheckTermInDescription from "@/entities/term/ui/checkTermInDescription/CheckTermInDescription";
+import NestedTerms from "@/entities/term/ui/nestedTerms/NestedTerms";
 import { Term } from "@/entities/term/model/types";
+
+import styles from "./TermCard.module.scss";
 
 interface TermCardProps {
   term: Term;
@@ -29,13 +31,13 @@ const TermCard = ({
   tokenize,
 }: TermCardProps) => {
   return (
-    <div className="Terms-content" key={term.id}>
-      <h1 className="Terms-content-name">
+    <div className={styles.TermsCard} key={term.id}>
+      <h1 className={styles.TermsCardName}>
         {term.original} ({term.russian})
       </h1>
 
-      <div className="Terms-content-container">
-        <div className="Terms-content-description">
+      <div className={styles.TermsCardContainer}>
+        <div className={styles.TermsCardDescription}>
           {tokenize(term.description).map((part, index) => {
             const isWord = /[a-zа-яё0-9]/i.test(part);
 
@@ -56,7 +58,7 @@ const TermCard = ({
 
         {term.video && (
           <button
-            className="Terms-content-video-btn"
+            className={styles.TermsCardVideoButton}
             onClick={() => toggleVideo(term.id)}
           >
             {isVideoOpen ? "Скрыть видео" : "Показать видео"}
@@ -64,9 +66,9 @@ const TermCard = ({
         )}
 
         {isVideoOpen && term.video && (
-          <div className="Terms-content-video-container">
+          <div className={styles.TermsCardVideoContainer}>
             <iframe
-              className="Terms-content-video"
+              className={styles.TermsCardVideo}
               src={term.video}
               loading="lazy"
               referrerPolicy="no-referrer"

@@ -1,4 +1,4 @@
-import "./searchBar.scss";
+import style from "./SearchBar.module.scss";
 
 interface SearchProps {
   value: string;
@@ -7,7 +7,7 @@ interface SearchProps {
 
 const SearchBar = ({ value, onChange }: SearchProps) => {
   return (
-    <div className="Search">
+    <div className={style.SearchBar}>
       <input
         type="text"
         value={value}

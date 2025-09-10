@@ -1,5 +1,5 @@
 import type { Term } from "@/entities/term/model/types";
-import "./checkTermInDescription.scss";
+import styles from "./CheckTermInDescription.module.scss";
 
 interface CheckTermInDescriptionProps {
   word: string;
@@ -36,9 +36,7 @@ const CheckTermInDescription = ({
 
   return (
     <span
-      className={`Terms-content-description-word ${
-        foundTerm ? "highlight" : ""
-      }`}
+      className={foundTerm ? styles.highlight : ""}
       onClick={foundTerm ? handleTermClick : undefined}
     >
       {word}

@@ -1,6 +1,6 @@
 import { Term } from "@/entities/term/model/types";
-import CheckTermInDescription from "./checkTermInDescription";
-import "./NestedTerms.scss";
+import CheckTermInDescription from "@/entities/term/ui/checkTermInDescription/CheckTermInDescription";
+import styles from "./NestedTerms.module.scss";
 
 interface NestedTermsProps {
   parentTermId: number;
@@ -24,23 +24,23 @@ const NestedTerms = ({
   terms,
 }: NestedTermsProps) => {
   return (
-    <div>
+    <div className={styles.NestedTerms}>
       {currentNestedTerms.length > 0 && (
-        <div className="Terms-nested-container">
+        <div>
           {currentNestedTerms.map((nestedTerm) => (
-            <div key={nestedTerm.id} className="Terms-nested-item">
-              <div className="Terms-nested-header">
+            <div className={styles.NestedTermsItem} key={nestedTerm.id}>
+              <div className={styles.NestedTermsHeader}>
                 <button
-                  className="Terms-nested-close"
+                  className={styles.NestedTermsCloseButton}
                   onClick={() => removeNestedTerm(parentTermId, nestedTerm.id)}
                 >
                   ×
                 </button>
-                <h4 className="Terms-content-name">
+                <h4>
                   {nestedTerm.original} ({nestedTerm.russian})
                 </h4>
               </div>
-              <div className="Terms-nested-content-description">
+              <div>
                 {tokenize(nestedTerm.description).map((part, index) => {
                   const isWord = /[a-zа-яё0-9]/i.test(part);
 
@@ -60,7 +60,7 @@ const NestedTerms = ({
               </div>
               {nestedTerm.video && (
                 <button
-                  className="Terms-content-video-btn"
+                  className={styles.NestedTermsVideoButton}
                   onClick={() =>
                     setOpenNestedVideoId(
                       openNestedVideoId === nestedTerm.id ? null : nestedTerm.id
@@ -74,9 +74,9 @@ const NestedTerms = ({
               )}
 
               {openNestedVideoId === nestedTerm.id && nestedTerm.video && (
-                <div className="Terms-content-video-container">
+                <div className={styles.NestedTermsVideoContainer}>
                   <iframe
-                    className="Terms-content-video"
+                    className={styles.NestedTermsVideo}
                     src={nestedTerm.video}
                     loading="lazy"
                     referrerPolicy="no-referrer"

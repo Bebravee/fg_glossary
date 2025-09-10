@@ -1,16 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import "./homePage.scss";
 
-import Search from "@/features/search/ui/searchBar";
-import Terms from "@/features/terms/ui/terms";
+import Search from "@/features/search/ui/SearchBar";
+import Terms from "@/features/terms/ui/Terms";
+
+import styles from "./page.module.scss";
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState<string>("");
 
   return (
-    <div className="HomePage">
+    <div className={styles.HomePage}>
       <Search value={searchInput} onChange={setSearchInput} />
       <Terms searchInput={searchInput} />
     </div>

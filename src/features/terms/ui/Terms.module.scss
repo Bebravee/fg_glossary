@@ -1,0 +1,11 @@
+@use "@/shared/styles/global.scss" as *;
+
+.Terms {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+  @media (max-width: $medium-screen) {
+    gap: 25px;
+  }
+}

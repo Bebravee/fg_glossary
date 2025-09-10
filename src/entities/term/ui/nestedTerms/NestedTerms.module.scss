@@ -1,0 +1,59 @@
+@use "@/shared/styles/global.scss" as *;
+
+.NestedTerms {
+  &Item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+  &Header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  &CloseButton {
+    background-color: $bg-main-color;
+    border: none;
+    font-size: 25px;
+  }
+
+  &VideoButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    max-width: 150px;
+    height: 50px;
+    background-color: $bg-alt-color2;
+    border: none;
+    transition: all 0.15s ease;
+    font-size: 16px;
+
+    @media (max-width: $medium-screen) {
+      max-width: none;
+    }
+
+    @media (max-width: $small-screen) {
+      font-size: 12px;
+      height: 35px;
+    }
+
+    &:hover {
+      background-color: $bg-alt-color;
+    }
+  }
+
+  &VideoContainer {
+    max-width: 500px;
+    aspect-ratio: 16 / 9;
+  }
+
+  &Video {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}

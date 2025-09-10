@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import terms from "@/shared/date/terms.json";
-import "./terms.scss";
 import FilterSearch from "@/features/search/modal/FilterSearch";
-import TermCard from "@/entities/term/ui/TermCard";
+import TermCard from "@/entities/term/ui/termCard/TermCard";
 import { Term } from "@/entities/term/model/types";
+
+import styles from "./Terms.module.scss";
 
 interface TermsProps {
   searchInput: string;
@@ -60,11 +61,9 @@ const Terms = ({ searchInput }: TermsProps) => {
   };
 
   return (
-    <div className="Terms">
+    <div className={styles.Terms}>
       {filteredTerms.length === 0 ? (
-        <div className="Terms-no-results">
-          Ничего не найдено по запросу: &quot;{searchInput}&quot;
-        </div>
+        <div>Ничего не найдено по запросу: &quot;{searchInput}&quot;</div>
       ) : (
         filteredTerms.map((term) => {
           const isVideoOpen = openVideoId === term.id;
