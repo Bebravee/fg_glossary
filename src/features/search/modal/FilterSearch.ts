@@ -1,4 +1,4 @@
-import type Term from "@/entities/term/model/types";
+import { Term } from "@/entities/term/model/types";
 
 const FilterSearch = (terms: Term[], searchText: string): Term[] => {
   if (!searchText.trim()) return terms;
