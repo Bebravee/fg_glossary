@@ -1,0 +1,162 @@
+@use "@/shared/styles/global.scss" as *;
+
+.Header {
+  position: sticky;
+  padding: 25px 100px;
+  background-color: $bg-alt-color;
+
+  @media (max-width: $medium-screen) {
+    padding: 15px 0;
+  }
+
+  @media (max-width: $small-screen) {
+    padding: 8px 0;
+  }
+
+  &Content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+
+    @media (max-width: $medium-screen) {
+      justify-content: center;
+      position: relative;
+    }
+  }
+
+  &Logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    @media (max-width: $medium-screen) {
+      text-align: center;
+      width: 100%;
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
+
+    @media (max-width: $small-screen) {
+      font-size: 12px;
+    }
+  }
+
+  &Rukia {
+    @media (max-width: $medium-screen) {
+      width: 40px;
+      height: 40px;
+    }
+
+    @media (max-width: $small-screen) {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &Links {
+    display: flex;
+    gap: 20px;
+
+    @media (max-width: $medium-screen) {
+      display: none;
+    }
+  }
+
+  .NonActive {
+    color: $font-color-alt;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $font-color;
+    }
+  }
+
+  .Active {
+    text-decoration: underline;
+    color: $font-color;
+  }
+
+  &MenuButton {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $medium-screen) {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+    }
+  }
+
+  &MenuButtonIcon {
+    width: 35px;
+    height: 35px;
+
+    @media (max-width: $small-screen) {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &MenuMobile {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: $bg-alt-color2;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100vh;
+    font-size: 25px;
+    z-index: 1000;
+
+    * {
+      padding: 15px 0 15px 15px;
+      border-bottom: 1px solid $font-color;
+    }
+
+    &Active {
+      color: $font-color;
+    }
+
+    &NonActive {
+      color: $font-color-alt;
+    }
+
+    &Open {
+      animation: isMenuOpen 0.15s ease forwards;
+    }
+
+    &Close {
+      animation: isMenuClose 0.15s ease forwards;
+    }
+
+    @keyframes isMenuOpen {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes isMenuClose {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(100%);
+      }
+    }
+  }
+}

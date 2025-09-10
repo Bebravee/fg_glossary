@@ -1,6 +1,8 @@
 import { Term } from "@/entities/term/model/types";
 import CheckTermInDescription from "@/entities/term/ui/checkTermInDescription/CheckTermInDescription";
 import styles from "./NestedTerms.module.scss";
+import CloseIcon from "@/shared/icons/close_icon.svg";
+import ShowVideoIcon from "@/shared/icons/show_video.svg";
 
 interface NestedTermsProps {
   parentTermId: number;
@@ -24,7 +26,7 @@ const NestedTerms = ({
   terms,
 }: NestedTermsProps) => {
   return (
-    <div className={styles.NestedTerms}>
+    <div className="NestedTerms">
       {currentNestedTerms.length > 0 && (
         <div>
           {currentNestedTerms.map((nestedTerm) => (
@@ -34,7 +36,7 @@ const NestedTerms = ({
                   className={styles.NestedTermsCloseButton}
                   onClick={() => removeNestedTerm(parentTermId, nestedTerm.id)}
                 >
-                  ×
+                  <CloseIcon className={styles.NestedTermsCloseIcon} />
                 </button>
                 <h4>
                   {nestedTerm.original} ({nestedTerm.russian})
@@ -67,9 +69,11 @@ const NestedTerms = ({
                     )
                   }
                 >
-                  {openNestedVideoId === nestedTerm.id
-                    ? "Скрыть видео"
-                    : "Показать видео"}
+                  {openNestedVideoId === nestedTerm.id ? (
+                    "Скрыть видео"
+                  ) : (
+                    <ShowVideoIcon />
+                  )}
                 </button>
               )}
 

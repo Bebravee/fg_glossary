@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import useWindowWidth from "@/shared/hooks/useWindowWidth";
-import NavMenuIcon from "@/assets/icons/nav_menu_icon.svg";
+import NavMenuIcon from "@/shared/icons/nav_menu_icon.svg";
 import rukia from "./rukia.png";
 
-import "./header.scss";
+import styles from "./Header.module.scss";
 
 const Header = () => {
   const pathname = usePathname();
@@ -61,12 +61,12 @@ const Header = () => {
 
   return (
     <div>
-      <nav className="Header">
-        <div className="Header-content container">
-          <Link href="/" className="Header-logo">
+      <nav className={styles.Header}>
+        <div className={styles.HeaderContent}>
+          <Link href="/" className={styles.HeaderLogo}>
             FG Glossary RU
             <Image
-              className="Header-content-rukia"
+              className={styles.HeaderRukia}
               src={rukia}
               alt="rukia"
               width={50}
@@ -74,20 +74,22 @@ const Header = () => {
             />
           </Link>
 
-          <div className="Header-content-links">
+          <div className={styles.HeaderLinks}>
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={pathname === link.href ? "active" : "non-active"}
+                className={
+                  pathname === link.href ? styles.Active : styles.NonActive
+                }
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          <button className="Header-content-menu-btn" onClick={toggleMenu}>
-            <NavMenuIcon className="Header-content-menu-btn-icon" />
+          <button className={styles.HeaderMenuButton} onClick={toggleMenu}>
+            <NavMenuIcon className={styles.HeaderMenuButtonIcon} />
           </button>
         </div>
       </nav>
@@ -95,8 +97,10 @@ const Header = () => {
       {isMenuVisible && (
         <div
           ref={menuRef}
-          className={`Header-content-menu-mobile ${
-            isMenuOpen ? "open" : "close"
+          className={`${styles.HeaderMenuMobile} ${
+            isMenuOpen
+              ? styles.HeaderMenuMobileOpen
+              : styles.HeaderMenuMobileClose
           }`}
         >
           {links.map((link) => (
@@ -106,8 +110,8 @@ const Header = () => {
               onClick={toggleMenu}
               className={
                 pathname === link.href
-                  ? "menu-mobile-active"
-                  : "menu-mobile-non-active"
+                  ? styles.HeaderMenuMobileActive
+                  : styles.HeaderMenuMobileNonActive
               }
             >
               {link.label}

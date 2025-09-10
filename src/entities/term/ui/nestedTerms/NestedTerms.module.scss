@@ -4,6 +4,8 @@
   &Item {
     display: flex;
     flex-direction: column;
+    border-top: 1px solid #fff;
+    padding: 15px 0;
 
     gap: 15px;
   }
@@ -11,13 +13,23 @@
   &Header {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
   }
 
   &CloseButton {
-    background-color: $bg-main-color;
     border: none;
-    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+
+    background: none;
+    font-size: 0;
+    background-color: $bg-alt-color4;
+  }
+
+  &CloseIcon {
+    font-size: 0;
   }
 
   &VideoButton {

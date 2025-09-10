@@ -4,6 +4,7 @@ import NestedTerms from "@/entities/term/ui/nestedTerms/NestedTerms";
 import { Term } from "@/entities/term/model/types";
 
 import styles from "./TermCard.module.scss";
+import ShowVideoIcon from "@/shared/icons/show_video.svg";
 
 interface TermCardProps {
   term: Term;
@@ -61,7 +62,7 @@ const TermCard = ({
             className={styles.TermsCardVideoButton}
             onClick={() => toggleVideo(term.id)}
           >
-            {isVideoOpen ? "Скрыть видео" : "Показать видео"}
+            {isVideoOpen ? <ShowVideoIcon /> : <ShowVideoIcon />}
           </button>
         )}
 
@@ -78,16 +79,18 @@ const TermCard = ({
           </div>
         )}
 
-        <NestedTerms
-          parentTermId={term.id}
-          currentNestedTerms={currentNestedTerms}
-          removeNestedTerm={removeNestedTerm}
-          addNestedTerm={addNestedTerm}
-          openNestedVideoId={openNestedVideoId}
-          setOpenNestedVideoId={setOpenNestedVideoId}
-          tokenize={tokenize}
-          terms={terms}
-        />
+        {currentNestedTerms.length > 0 && (
+          <NestedTerms
+            parentTermId={term.id}
+            currentNestedTerms={currentNestedTerms}
+            removeNestedTerm={removeNestedTerm}
+            addNestedTerm={addNestedTerm}
+            openNestedVideoId={openNestedVideoId}
+            setOpenNestedVideoId={setOpenNestedVideoId}
+            tokenize={tokenize}
+            terms={terms}
+          />
+        )}
       </div>
     </div>
   );
