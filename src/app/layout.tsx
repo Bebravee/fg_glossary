@@ -4,6 +4,7 @@ import { Exo_2 } from "next/font/google";
 import Header from "@/shared/ui/header/Header";
 
 import "@/shared/styles/global.scss";
+import Footer from "@/shared/ui/footer/Footer";
 
 const exo_2 = Exo_2({
   subsets: ["latin"],
@@ -25,7 +26,10 @@ export default function RootLayout({
       <body>
         <div className="layout">
           <Header />
-          <main className="container">{children}</main>
+          <main className="container">
+            {children}
+            <Footer />
+          </main>
         </div>
       </body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 
 import Search from "@/features/search/ui/searchBar/SearchBar";
 import Terms from "@/features/terms/ui/Terms";
@@ -10,6 +10,7 @@ import styles from "./page.module.scss";
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
+  const [filteredGames, setFilteredGames] = useState([]);
 
   return (
     <div className={styles.HomePage}>
@@ -19,7 +20,7 @@ const HomePage = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />
-      <Terms searchInput={searchInput} isOpen={isOpen}/>
+      <Terms searchInput={searchInput} isOpen={isOpen} />
     </div>
   );
 };

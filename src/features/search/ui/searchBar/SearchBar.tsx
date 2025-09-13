@@ -44,7 +44,9 @@ const SearchBar = ({ value, onChange, isOpen, setIsOpen }: SearchProps) => {
           unmountOnExit
         >
           <div ref={filterWindowRef} className={style.FilterWindow}>
-            <Image src={Tekken8Logo} alt="Tekken 8" width={50} />
+            <div className={style.IconContainer}>
+              <Image src={Tekken8Logo} alt="Tekken 8" width={50} />
+            </div>
           </div>
         </CSSTransition>
       </div>
