@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import Search from "@/features/search/ui/SearchBar";
+import Search from "@/features/search/ui/searchBar/SearchBar";
 import Terms from "@/features/terms/ui/Terms";
 
 import styles from "./page.module.scss";
