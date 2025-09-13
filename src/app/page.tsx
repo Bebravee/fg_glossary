@@ -9,11 +9,17 @@ import styles from "./page.module.scss";
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState<string>("");
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className={styles.HomePage}>
-      <Search value={searchInput} onChange={setSearchInput} />
-      <Terms searchInput={searchInput} />
+      <Search
+        value={searchInput}
+        onChange={setSearchInput}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+      <Terms searchInput={searchInput} isOpen={isOpen}/>
     </div>
   );
 };

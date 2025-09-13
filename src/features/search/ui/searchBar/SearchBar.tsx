@@ -9,10 +9,11 @@ import style from "./SearchBar.module.scss";
 interface SearchProps {
   value: string;
   onChange: (value: string) => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-const SearchBar = ({ value, onChange }: SearchProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const SearchBar = ({ value, onChange, isOpen, setIsOpen }: SearchProps) => {
   const filterWindowRef = useRef<HTMLDivElement>(null);
 
   const handlerOpen = () => {

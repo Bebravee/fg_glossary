@@ -6,3 +6,31 @@
 
   gap: 15px;
 }
+
+.IsOpen {
+  animation: openFilterWindow 0.1s ease forwards;
+}
+
+.IsClose {
+  animation: closeFilterWindow 0.1s ease forwards;
+}
+
+@keyframes openFilterWindow {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(55px);
+  }
+}
+
+@keyframes closeFilterWindow {
+  from {
+    transform: translateY(55px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
