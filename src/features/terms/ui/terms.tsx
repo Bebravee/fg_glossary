@@ -10,9 +10,10 @@ import styles from "./Terms.module.scss";
 interface TermsProps {
   searchInput: string;
   isOpen: boolean;
+  filteredGames: string[];
 }
 
-const Terms = ({ searchInput, isOpen }: TermsProps) => {
+const Terms = ({ searchInput, isOpen, filteredGames }: TermsProps) => {
   const [openVideoId, setOpenVideoId] = useState<number | null>(null);
   const [openNestedVideoId, setOpenNestedVideoId] = useState<number | null>(
     null
@@ -55,7 +56,7 @@ const Terms = ({ searchInput, isOpen }: TermsProps) => {
     }));
   };
 
-  const filteredTerms = FilterSearch(terms, searchInput);
+  const filteredTerms = FilterSearch(terms, searchInput, filteredGames);
 
   const tokenize = (text: string) => {
     return text.split(/(\s+|[.,!?;:()«»"'])/).filter(Boolean);

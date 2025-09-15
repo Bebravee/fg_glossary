@@ -48,6 +48,7 @@
   border-bottom-left-radius: 15px;
 
   box-sizing: border-box;
+  display: flex;
 
   .IconContainer {
     display: flex;
@@ -57,7 +58,16 @@
 
     padding: 15px;
     max-width: 35px;
+    max-height: 15px;
+
+    &:first-child {
+      border-bottom-left-radius: 15px;
+    }
   }
+}
+
+.Active {
+  background-color: rgb(78, 126, 78);
 }
 
 .IsOpen {

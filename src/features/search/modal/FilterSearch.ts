@@ -1,13 +1,22 @@
 import { Term } from "@/entities/term/model/types";
 
-const FilterSearch = (terms: Term[], searchText: string): Term[] => {
-  if (!searchText.trim()) return terms;
+const FilterSearch = (
+  terms: Term[],
+  searchText: string,
+  filteredGames: string[]
+): Term[] => {
+  let filteredByGames = terms;
+  if (filteredGames.length > 0) {
+    filteredByGames = terms.filter((term) =>
+      term.games.some((game) => filteredGames.includes(game))
+    );
+  }
+
+  if (!searchText.trim()) return filteredByGames;
 
   const searchLower = searchText.toLowerCase();
 
-  console.log("Render Terms");
-
-  return terms.filter((term) => {
+  return filteredByGames.filter((term) => {
     const matchesOriginal = term.original.toLowerCase().includes(searchLower);
     const matchesRussian = term.russian.toLowerCase().includes(searchLower);
     const matchesAliases = term.aliases.some((alias) =>
