@@ -1,0 +1,58 @@
+@use "../../styles/global.scss" as *;
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $bg-alt-color;
+
+  height: 60px;
+  font-size: 24px;
+
+  &Links {
+    display: flex;
+    gap: 15px;
+
+    * {
+      color: #afafaf;
+    }
+
+    &Button {
+      display: none;
+      height: 35px;
+
+      @media (max-width: $medium-screen) {
+        display: block;
+      }
+    }
+
+    @media (max-width: $medium-screen) {
+      display: none;
+    }
+  }
+}
+
+.MobileMenu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: $bg-alt-color;
+
+  * {
+    color: #afafaf;
+    padding: 15px;
+    border-bottom: 1px solid #fff;
+  }
+}
+
+.Active {
+  color: $font-color;
+  text-decoration: underline;
+}

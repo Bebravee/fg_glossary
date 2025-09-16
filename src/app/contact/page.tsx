@@ -1,11 +1,5 @@
-import style from "./page.module.scss";
-
-const ContactPage = () => {
-  return (
-    <div className={style.ContactPage}>
-      <h1>Контакты:</h1>
-    </div>
-  );
+const Contact = () => {
+  return <div>Contact</div>;
 };
 
-export default ContactPage;
+export default Contact;
