@@ -1,12 +1,13 @@
 @use "../../styles/global.scss" as *;
 
 .Header {
+  position: sticky;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   background-color: $bg-alt-color;
-
+  z-index: 1;
   height: 60px;
   font-size: 24px;
 
@@ -38,21 +39,48 @@
   right: 0;
   top: 0;
   width: 40%;
-  height: 100%;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
 
   background-color: $bg-alt-color;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
 
   * {
     color: #afafaf;
     padding: 15px;
     border-bottom: 1px solid #fff;
   }
+
+  &.Open {
+    animation: Open 0.15s ease forwards;
+  }
+
+  &.Close {
+    animation: Close 0.15s ease forwards;
+  }
 }
 
 .Active {
   color: $font-color;
   text-decoration: underline;
+}
+
+@keyframes Open {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes Close {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
 }

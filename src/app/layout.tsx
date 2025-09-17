@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en" className={exo_2.className}>
       <body>
         <Header />
-        <div className="container">{children}</div>
+        <div className="container content">{children}</div>
         <Footer />
       </body>
     </html>

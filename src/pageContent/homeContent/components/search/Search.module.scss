@@ -1,0 +1,63 @@
+@use "@/shared/styles/global.scss" as *;
+
+.Search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+
+  &BarAndFilterWindow {
+    position: relative;
+    width: 100%;
+
+    input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 15px;
+      height: 60px;
+
+      background-color: $bg-alt-color;
+      border: none;
+      border-radius: 15px;
+      outline: none;
+
+      font-size: 24px;
+    }
+
+    .IsOpen {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-bottom: 1px solid #fff;
+    }
+
+    .Filter {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      background-color: $bg-alt-color;
+
+      width: 100%;
+      height: 60px;
+
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+
+      * {
+        padding: 0 5px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .FilterIconContainer {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+
+    transition: transform 0.15s ease;
+  }
+
+  .FilterIconContainerIsOpen {
+    transform: rotate(-180deg);
+  }
+}

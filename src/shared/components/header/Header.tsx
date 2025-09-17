@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import ButtonIcon from "./Icons/Button.svg";
+import ButtonIcon from "./icons/Button.svg";
 import styles from "./Header.module.scss";
 
 interface LinkType {
@@ -12,6 +12,7 @@ interface LinkType {
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const pathName = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -22,14 +23,31 @@ const Header = () => {
     { href: "/donate", label: "Donate" },
   ];
 
-  const toggleMobileMenu = () => setMobileMenu(!mobileMenu);
+  const toggleMobileMenu = () => {
+    if (mobileMenu) {
+      // Запускаем анимацию закрытия
+      setIsClosing(true);
+      setTimeout(() => {
+        setMobileMenu(false);
+        setIsClosing(false);
+      }, 150); // Длительность анимации
+    } else {
+      setMobileMenu(true);
+    }
+  };
 
   const renderLink = (link: LinkType) => (
     <Link
       key={link.href}
       href={link.href}
       className={`${pathName === link.href && styles.Active}`}
-      onClick={() => setMobileMenu(false)}
+      onClick={() => {
+        setIsClosing(true);
+        setTimeout(() => {
+          setMobileMenu(false);
+          setIsClosing(false);
+        }, 150);
+      }}
     >
       {link.label}
     </Link>
@@ -38,13 +56,13 @@ const Header = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMobileMenu(false);
+        toggleMobileMenu();
       }
     };
 
     const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setMobileMenu(false);
+      if (window.innerWidth > 850 && mobileMenu) {
+        toggleMobileMenu();
       }
     };
 
@@ -73,7 +91,12 @@ const Header = () => {
       </div>
 
       {mobileMenu && (
-        <div ref={menuRef} className={styles.MobileMenu}>
+        <div
+          ref={menuRef}
+          className={`${styles.MobileMenu} ${
+            isClosing ? styles.Close : styles.Open
+          }`}
+        >
           {links.map(renderLink)}
         </div>
       )}
