@@ -31,9 +31,7 @@
     }
 
     .Filter {
-      position: absolute;
       display: flex;
-      align-items: center;
       background-color: $bg-alt-color;
 
       width: 100%;
@@ -42,9 +40,24 @@
       border-bottom-left-radius: 15px;
       border-bottom-right-radius: 15px;
 
-      * {
-        padding: 0 5px;
+      transition: background-color 0.5s ease;
+
+      .FilterGameContainer {
+        display: flex;
+        align-items: center;
+
         cursor: pointer;
+        height: 100%;
+
+        padding: 0 5px;
+      }
+
+      .Active {
+        background-color: rgb(61, 122, 61);
+
+        &:first-child {
+          border-bottom-left-radius: 15px;
+        }
       }
     }
   }

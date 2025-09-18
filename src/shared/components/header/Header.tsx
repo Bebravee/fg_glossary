@@ -25,12 +25,11 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     if (mobileMenu) {
-      // Запускаем анимацию закрытия
       setIsClosing(true);
       setTimeout(() => {
         setMobileMenu(false);
         setIsClosing(false);
-      }, 150); // Длительность анимации
+      }, 150);
     } else {
       setMobileMenu(true);
     }

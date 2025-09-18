@@ -1,0 +1,19 @@
+@use "@/shared/styles/global.scss" as *;
+
+.Terms {
+  display: flex;
+  flex-direction: column;
+
+  gap: 15px;
+
+  &Element {
+    display: flex;
+    flex-direction: column;
+
+    padding: 15px;
+    border-radius: 15px;
+    background-color: $bg-alt-color;
+
+    gap: 15px;
+  }
+}

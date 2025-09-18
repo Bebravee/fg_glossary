@@ -1,9 +1,7 @@
 import styles from "./Search.module.scss";
 import FilterIcon from "./icons/filter_icon.svg";
 
-import SF6Logo from "@/shared/img/games/SF6Logo.png";
-import Tekken8Logo from "@/shared/img/games/Tekken8Logo.png";
-
+import Games from "@/shared/date/games.json";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -14,18 +12,6 @@ interface SearchProps {
   setFilteredGames: (value: string[]) => void;
 }
 
-const Games = [
-  {
-    name: "Tekken 8",
-    img: Tekken8Logo,
-  },
-
-  {
-    name: "Street Fighter 6",
-    img: SF6Logo,
-  },
-];
-
 const Search = ({
   searchInput,
   setSearchInput,
@@ -35,13 +21,18 @@ const Search = ({
   const [filteredGamesWindowIsOpen, setFilteredGamesWindowIsOpen] =
     useState(false);
 
-  useEffect(() => {
-    console.log(filteredGames);
-  }, [filteredGames]);
-
   const handlerfilteredGamesWindowIsOpen = () => {
     setFilteredGamesWindowIsOpen(!filteredGamesWindowIsOpen);
   };
+
+  const handlerFilteredGames = (game: string) => {
+    if (filteredGames.includes(game)) {
+      setFilteredGames(filteredGames.filter((g) => g !== game));
+    } else {
+      setFilteredGames([...filteredGames, game]);
+    }
+  };
+
   return (
     <div className={styles.Search}>
       <div className={styles.SearchBarAndFilterWindow}>
@@ -56,9 +47,20 @@ const Search = ({
         {filteredGamesWindowIsOpen && (
           <div className={styles.Filter}>
             {Games.map((game) => {
+              const imageSrc =
+                require(`@/shared/img/games/${game.img}`).default;
+
               return (
-                <div key={game.name}>
-                  <Image src={game.img} alt={game.name} width={50}></Image>
+                <div
+                  key={game.name}
+                  className={`${styles.FilterGameContainer} ${
+                    filteredGames.includes(game.name) && styles.Active
+                  }`}
+                  onClick={() => {
+                    handlerFilteredGames(game.name);
+                  }}
+                >
+                  <Image src={imageSrc} alt={game.name} width={50}></Image>
                 </div>
               );
             })}
