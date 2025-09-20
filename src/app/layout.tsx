@@ -25,8 +25,10 @@ export default function RootLayout({
     <html lang="en" className={exo_2.className}>
       <body>
         <Header />
-        <div className="container content">{children}</div>
-        <Footer />
+        <div className="scroll-area">
+          <div className="container content">{children}</div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

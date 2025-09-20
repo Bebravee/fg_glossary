@@ -1,18 +1,30 @@
 // COLORS
 $font-color: #fff;
-$font-color-alt: #b4b4b4;
 $bg-main-color: #2f2933;
 $bg-alt-color: #1d1c20;
+$bg-alt-color2: #211f25;
+$bg-alt-color3: #524166;
+
+$border-color: #fff;
 
 // SCREEN
 $medium-screen: 850px;
 $small-screen: 350px;
+
+$header-height: 60px;
+
+html,
+body,
+#__next {
+  height: 100%;
+}
 
 body {
   padding: 0;
   margin: 0;
 
   background-color: $bg-main-color;
+  overflow: hidden;
 
   * {
     padding: 0;
@@ -35,4 +47,30 @@ body {
 .content {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+
+.scroll-area {
+  position: relative;
+  height: calc(100vh - $header-height);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-area::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-area::-webkit-scrollbar-track {
+  background: $bg-alt-color;
+}
+
+.scroll-area::-webkit-scrollbar-thumb {
+  background-color: $bg-alt-color2;
+  border-radius: 8px;
+  border: 2px solid $bg-alt-color;
+}
+
+.scroll-area {
+  scrollbar-width: thin;
+  scrollbar-color: $bg-alt-color3 $bg-alt-color;
 }

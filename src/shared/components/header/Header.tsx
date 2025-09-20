@@ -1,27 +1,17 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+
 import ButtonIcon from "./icons/Button.svg";
 import styles from "./Header.module.scss";
 
-interface LinkType {
-  href: string;
-  label: string;
-}
+import RenderLink from "../links/Links";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const pathName = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
-
-  const links: LinkType[] = [
-    { href: "/", label: "Home" },
-    { href: "/contact", label: "Contact" },
-    { href: "/credits", label: "Credits" },
-    { href: "/donate", label: "Donate" },
-  ];
 
   const toggleMobileMenu = () => {
     if (mobileMenu) {
@@ -34,23 +24,6 @@ const Header = () => {
       setMobileMenu(true);
     }
   };
-
-  const renderLink = (link: LinkType) => (
-    <Link
-      key={link.href}
-      href={link.href}
-      className={`${pathName === link.href && styles.Active}`}
-      onClick={() => {
-        setIsClosing(true);
-        setTimeout(() => {
-          setMobileMenu(false);
-          setIsClosing(false);
-        }, 150);
-      }}
-    >
-      {link.label}
-    </Link>
-  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -83,7 +56,9 @@ const Header = () => {
         <p>FG Glossary RU</p>
       </div>
 
-      <div className={styles.HeaderLinks}>{links.map(renderLink)}</div>
+      <div className={styles.HeaderLinks}>
+        <RenderLink activeLink={styles.Active} />
+      </div>
 
       <div className={styles.HeaderLinksButton} onClick={toggleMobileMenu}>
         <ButtonIcon />
@@ -96,7 +71,16 @@ const Header = () => {
             isClosing ? styles.Close : styles.Open
           }`}
         >
-          {links.map(renderLink)}
+          <RenderLink
+            onClick={() => {
+              setIsClosing(true);
+              setTimeout(() => {
+                setMobileMenu(false);
+                setIsClosing(false);
+              }, 150);
+            }}
+            activeLink={styles.Active}
+          />
         </div>
       )}
     </div>

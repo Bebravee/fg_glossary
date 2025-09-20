@@ -12,8 +12,37 @@
 
     padding: 15px;
     border-radius: 15px;
-    background-color: $bg-alt-color;
+    background-color: $bg-alt-color3;
 
     gap: 15px;
+
+    &Video {
+      display: flex;
+      flex-direction: column;
+
+      gap: 15px;
+
+      button {
+        cursor: pointer;
+        background-color: $bg-alt-color2;
+        border: none;
+        border-radius: 10px;
+        width: 160px;
+        height: 40px;
+      }
+
+      iframe {
+        border: none;
+        width: 560px;
+        height: 315px;
+      }
+    }
+  }
+}
+
+.DescriptionWord {
+  &Highlighter {
+    cursor: pointer;
+    text-decoration: underline;
   }
 }
