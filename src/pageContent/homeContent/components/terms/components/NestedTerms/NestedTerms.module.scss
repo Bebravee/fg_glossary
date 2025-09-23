@@ -1,0 +1,52 @@
+@use "@/shared/styles/global.scss" as *;
+
+.NestedTerms {
+  display: flex;
+  flex-direction: column;
+
+  padding-left: 25px;
+
+  .NestedItem {
+    display: flex;
+    flex-direction: column;
+
+    border-top: 1px solid #fff;
+
+    gap: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    &:last-child {
+      padding-bottom: 0;
+    }
+    iframe {
+      border: none;
+      width: 560px;
+      height: 315px;
+    }
+
+    .NestedHeader {
+      display: flex;
+      gap: 10px;
+    }
+
+    .NestedVideo {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.CloseVideoButton {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.OpenVideoButton {
+  cursor: pointer;
+  background-color: $bg-alt-color2;
+  border: none;
+  border-radius: 10px;
+  width: 160px;
+  height: 40px;
+}

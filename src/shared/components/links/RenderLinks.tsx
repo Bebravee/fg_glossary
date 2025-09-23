@@ -18,7 +18,7 @@ const links: LinkType[] = [
   { href: "/donate", label: "Donate" },
 ];
 
-const RenderLink = ({ onClick, activeLink }: RenderLinkProps) => {
+const RenderLinks = ({ onClick, activeLink }: RenderLinkProps) => {
   const pathname = usePathname();
 
   return (
@@ -41,4 +41,4 @@ const RenderLink = ({ onClick, activeLink }: RenderLinkProps) => {
   );
 };
 
-export default RenderLink;
+export default RenderLinks;

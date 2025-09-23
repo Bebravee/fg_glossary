@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import terms from "@/shared/date/terms.json";
 import { Term } from "@/shared/types/types";
 import styles from "./Terms.module.scss";
-import { useMemo } from "react";
+
+import CheckTermInDescription from "./components/CheckTermInDescription/CheckTermInDescription";
+import NestedTerms from "./components/NestedTerms/NestedTerms";
 
 interface TermsProps {
   searchInput?: string;
@@ -11,85 +13,46 @@ interface TermsProps {
 }
 
 const Terms = ({ searchInput, filteredGames }: TermsProps) => {
-  const [activeVideoId, setActiveVideoId] = useState<number | null>(null);
+  const [openVideoId, setOpenVideoId] = useState<number | null>(null);
+  const [openNestedVideoId, setOpenNestedVideoId] = useState<number | null>(
+    null
+  );
+  const [nestedTerms, setNestedTerms] = useState<Record<number, Term[]>>({});
 
-  const checkFullWord = (word: string) => {};
+  useEffect(() => {
+    setNestedTerms({});
+    setOpenVideoId(null);
+    setOpenNestedVideoId(null);
+  }, [searchInput]);
 
-  const handlerCheckWord = (word: string) => {
-    const hasMatch = terms.some(
-      (term) =>
-        term.original.includes(word) ||
-        term.russian.includes(word) ||
-        term.aliases.includes(word)
-    );
+  const handlerSetVideo = () => {};
 
-    if (hasMatch) console.log(word);
-
-    return hasMatch;
+  const addNestedTerm = (parentTermId: number, termToAdd: Term) => {
+    if (parentTermId === termToAdd.id) return;
+    setNestedTerms((prev) => {
+      const current = prev[parentTermId] || [];
+      if (current.some((t) => t.id === termToAdd.id)) return prev;
+      return { ...prev, [parentTermId]: [...current, termToAdd] };
+    });
   };
 
-  const handlerDescription = (description: string) => {
-    const splitedDescription = description.split(" ");
-
-    return splitedDescription.map((word, index) => (
-      <span
-        key={index}
-        className={`${styles.DescriptionWord} ${
-          handlerCheckWord(word) && styles.DescriptionWordHighlighter
-        }`}
-      >
-        {word}
-        {index < splitedDescription.length - 1 && " "}
-      </span>
-    ));
-  };
-
-  const termsDisplay = (arr: Term[]) => {
-    return arr.map((term) => (
-      <div key={term.id} className={styles.TermsElement}>
-        <h1 className={styles.TermsElementName}>
-          {term.original} {`(${term.russian})`}
-        </h1>
-        <p className={styles.TermsElementDescription}>
-          {handlerDescription(term.description)}
-        </p>
-        {term.video && (
-          <div className={styles.TermsElementVideo}>
-            <button
-              onClick={() => {
-                setActiveVideoId(term.id === activeVideoId ? null : term.id);
-              }}
-            >
-              {activeVideoId === term.id ? "Скрыть видео" : "Показать видео"}
-            </button>
-
-            {activeVideoId === term.id && <iframe src={term.video}></iframe>}
-          </div>
-        )}
-      </div>
-    ));
-  };
+  const tokenize = (text: string) =>
+    text.split(/(\s+|[.,!?;:()«»"'])/).filter(Boolean);
 
   const filteredTerms = useMemo(() => {
-    if (!searchInput && filteredGames.length === 0) {
-      return terms;
-    }
-
+    if (!searchInput && filteredGames.length === 0) return terms;
     return terms.filter((term) => {
-      const hasSearchMatch = searchInput
-        ? term.original.toLowerCase().includes(searchInput.toLowerCase()) ||
-          term.russian.toLowerCase().includes(searchInput.toLowerCase()) ||
-          term.aliases.some((alias) =>
-            alias.toLowerCase().includes(searchInput.toLowerCase())
-          )
+      const s = searchInput?.toLowerCase() ?? "";
+      const matchSearch = s
+        ? term.original.toLowerCase().includes(s) ||
+          term.russian.toLowerCase().includes(s) ||
+          term.aliases.some((a) => a.toLowerCase().includes(s))
         : true;
-
-      const hasGameMatch =
+      const matchGame =
         filteredGames.length > 0
-          ? term.games.some((game) => filteredGames.includes(game))
+          ? term.games.some((g) => filteredGames.includes(g))
           : true;
-
-      return hasSearchMatch && hasGameMatch;
+      return matchSearch && matchGame;
     });
   }, [searchInput, filteredGames]);
 
@@ -101,7 +64,72 @@ const Terms = ({ searchInput, filteredGames }: TermsProps) => {
     );
   }
 
-  return <div className={styles.Terms}>{termsDisplay(filteredTerms)}</div>;
+  return (
+    <div className={styles.Terms}>
+      {filteredTerms.map((term) => {
+        const isVideoOpen = openVideoId === term.id;
+        const currentNestedTerms = nestedTerms[term.id] || [];
+
+        return (
+          <div key={term.id} className={styles.TermsElement}>
+            <h1 className={styles.TermsElementName}>
+              {term.original} ({term.russian})
+            </h1>
+
+            <div className={styles.TermsElementDescription}>
+              {tokenize(term.description).map((part, i) => {
+                const isWord = /[a-zа-яё0-9]/i.test(part);
+                return isWord ? (
+                  <CheckTermInDescription
+                    key={i}
+                    word={part}
+                    terms={terms}
+                    currentTermId={term.id}
+                    onTermClick={(clicked) => addNestedTerm(term.id, clicked)}
+                  />
+                ) : (
+                  <span key={i}>{part}</span>
+                );
+              })}
+            </div>
+
+            {term.video && (
+              <div className={styles.TermsElementVideo}>
+                <button
+                  onClick={() => setOpenVideoId(isVideoOpen ? null : term.id)}
+                >
+                  {isVideoOpen ? "Скрыть видео" : "Показать видео"}
+                </button>
+                {isVideoOpen && (
+                  <iframe src={term.video} loading="lazy"></iframe>
+                )}
+              </div>
+            )}
+
+            {currentNestedTerms.length > 0 && (
+              <NestedTerms
+                parentTermId={term.id}
+                currentNestedTerms={currentNestedTerms}
+                removeNestedTerm={(parentId, nestedId) =>
+                  setNestedTerms((prev) => ({
+                    ...prev,
+                    [parentId]: (prev[parentId] || []).filter(
+                      (t) => t.id !== nestedId
+                    ),
+                  }))
+                }
+                addNestedTerm={addNestedTerm}
+                openNestedVideoId={openNestedVideoId}
+                setOpenNestedVideoId={setOpenNestedVideoId}
+                tokenize={tokenize}
+                terms={terms}
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Terms;

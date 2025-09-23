@@ -1,7 +1,20 @@
 @use "@/shared/styles/global.scss" as *;
 
 .Footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   background-color: $bg-alt-color;
 
-  height: 200px;
+  &Logo {
+    font-size: 30px;
+  }
+
+  &Links {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+  }
 }

@@ -27,7 +27,6 @@ export default function RootLayout({
         <Header />
         <div className="scroll-area">
           <div className="container content">{children}</div>
-          <Footer />
         </div>
       </body>
     </html>

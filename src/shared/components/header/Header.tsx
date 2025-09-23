@@ -1,16 +1,15 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
 
 import ButtonIcon from "./icons/Button.svg";
 import styles from "./Header.module.scss";
 
-import RenderLink from "../links/Links";
+import RenderLinks from "../links/RenderLinks";
+import RenderLogo from "../logo/RenderLogo";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const pathName = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMobileMenu = () => {
@@ -53,11 +52,11 @@ const Header = () => {
   return (
     <div className={`${styles.Header} container`}>
       <div className={styles.HeaderLogo}>
-        <p>FG Glossary RU</p>
+        <RenderLogo />
       </div>
 
       <div className={styles.HeaderLinks}>
-        <RenderLink activeLink={styles.Active} />
+        <RenderLinks activeLink={styles.Active} />
       </div>
 
       <div className={styles.HeaderLinksButton} onClick={toggleMobileMenu}>
@@ -71,7 +70,7 @@ const Header = () => {
             isClosing ? styles.Close : styles.Open
           }`}
         >
-          <RenderLink
+          <RenderLinks
             onClick={() => {
               setIsClosing(true);
               setTimeout(() => {
