@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-import ButtonIcon from "./icons/Button.svg";
+import ButtonIcon from "@/shared/components/header/icons/Button.svg";
 import styles from "./Header.module.scss";
 
-import RenderLinks from "../links/RenderLinks";
-import RenderLogo from "../logo/RenderLogo";
+import RenderLinks from "@/shared/components/links/RenderLinks";
+import RenderLogo from "@/shared/components/logo/RenderLogo";
 
 const Header = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
