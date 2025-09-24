@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Search from "./components/search/Search";
 import Terms from "./components/terms/Terms";
+import Pagination from "./components/pagination/pagination";
 
 import style from "./HomeContent.module.scss";
 

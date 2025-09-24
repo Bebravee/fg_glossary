@@ -1,0 +1,11 @@
+@use "@/shared/styles/global.scss" as *;
+
+.CreditsContent {
+  display: flex;
+  flex-direction: column;
+
+  background-color: $bg-alt-color3;
+  padding: 15px;
+  border-radius: 15px;
+  gap: 15px;
+}

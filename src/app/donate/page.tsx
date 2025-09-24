@@ -1,5 +1,11 @@
+import DonateContent from "@/pageContent/donateContent/DonateContent";
+
 const Donate = () => {
-  return <div>Donate</div>;
+  return (
+    <div>
+      <DonateContent />
+    </div>
+  );
 };
 
 export default Donate;

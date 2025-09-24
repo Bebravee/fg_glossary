@@ -25,8 +25,6 @@ const Terms = ({ searchInput, filteredGames }: TermsProps) => {
     setOpenNestedVideoId(null);
   }, [searchInput]);
 
-  const handlerSetVideo = () => {};
-
   const addNestedTerm = (parentTermId: number, termToAdd: Term) => {
     if (parentTermId === termToAdd.id) return;
     setNestedTerms((prev) => {
