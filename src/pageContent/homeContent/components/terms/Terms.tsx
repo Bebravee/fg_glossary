@@ -3,6 +3,9 @@ import { useState, useMemo, useEffect } from "react";
 import terms from "@/shared/date/terms.json";
 import { Term } from "@/shared/types/types";
 import styles from "./Terms.module.scss";
+import gamesDate from "@/shared/date/games.json";
+import Image from "next/image";
+import l from "@/shared/img/games/SF6Logo.png";
 
 import CheckTermInDescription from "./components/CheckTermInDescription/CheckTermInDescription";
 import NestedTerms from "./components/NestedTerms/NestedTerms";
@@ -57,7 +60,7 @@ const Terms = ({ searchInput, filteredGames }: TermsProps) => {
   if (searchInput && filteredTerms.length === 0) {
     return (
       <div className={styles.Terms}>
-        <p>По запросу "{searchInput}" ничего не найдено</p>
+        <p>По запросу &quot;{searchInput}&quot; ничего не найдено</p>
       </div>
     );
   }
@@ -71,7 +74,29 @@ const Terms = ({ searchInput, filteredGames }: TermsProps) => {
         return (
           <div key={term.id} className={styles.TermsElement}>
             <h1 className={styles.TermsElementName}>
-              {term.original} ({term.russian})
+              <div>
+                {term.original} ({term.russian})
+              </div>
+
+              <div className={styles.TermsElementNameGames}>
+                {term.games.map((game) => {
+                  const date = gamesDate.find((g) => g.name === game);
+
+                  return (
+                    <div key={game}>
+                      {date && (
+                        <Image
+                          src={
+                            require(`@/shared/img/games/${date.img}`).default
+                          }
+                          alt={date.img}
+                          width={50}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </h1>
 
             <div className={styles.TermsElementDescription}>

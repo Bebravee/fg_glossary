@@ -16,6 +16,20 @@
 
     gap: 15px;
 
+    &Name {
+      position: relative;
+      display: flex;
+      gap: 15px;
+
+      justify-content: space-between;
+
+      &Games {
+        display: flex;
+        position: absolute;
+        right: 0;
+      }
+    }
+
     &Video {
       display: flex;
       flex-direction: column;
