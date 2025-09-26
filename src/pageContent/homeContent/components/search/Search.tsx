@@ -3,7 +3,7 @@ import FilterIcon from "./icons/filter_icon.svg";
 
 import Games from "@/shared/date/games.json";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 interface SearchProps {
   searchInput: string;

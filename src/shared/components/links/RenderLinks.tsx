@@ -16,6 +16,7 @@ const links: LinkType[] = [
   { href: "/contact", label: "Contact" },
   { href: "/credits", label: "Credits" },
   { href: "/donate", label: "Donate" },
+  { href: "/game", label: "Game" },
 ];
 
 const RenderLinks = ({ onClick, activeLink }: RenderLinkProps) => {

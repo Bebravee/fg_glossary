@@ -1,12 +1,14 @@
 @use "@/shared/styles/global.scss" as *;
 
-.CreditsContent {
+.GameContent {
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
+  align-items: center;
   background-color: $bg-alt-color3;
   padding: 15px;
   border-radius: 15px;
+
   gap: 15px;
 
   animation: pageContentOpen 0.15s ease;

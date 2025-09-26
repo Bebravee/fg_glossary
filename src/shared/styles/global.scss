@@ -74,3 +74,13 @@ body {
   scrollbar-width: thin;
   scrollbar-color: $bg-alt-color3 $bg-alt-color;
 }
+
+@keyframes pageContentOpen {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

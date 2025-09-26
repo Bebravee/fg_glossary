@@ -1,6 +1,10 @@
+@use "@/shared/styles/global.scss" as *;
+
 .HomeContent {
   display: flex;
   flex-direction: column;
 
   gap: 30px;
+
+  animation: pageContentOpen 0.15s ease;
 }
